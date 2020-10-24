@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KatyLibrary", "KatyLibrary\KatyLibrary.csproj", "{A401A3C9-D23D-44D1-BD45-59080207D450}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A401A3C9-D23D-44D1-BD45-59080207D450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A401A3C9-D23D-44D1-BD45-59080207D450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A401A3C9-D23D-44D1-BD45-59080207D450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A401A3C9-D23D-44D1-BD45-59080207D450}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0EC59ECE-A62B-4DF9-A455-BC332ECC6AD3}
+	EndGlobalSection
+EndGlobal

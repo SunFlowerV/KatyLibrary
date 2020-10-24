@@ -1,0 +1,50 @@
+﻿@page
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Вход";
+}
+@model LoginModel;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KatyLibrary</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/login.css" />
+</head>
+<body class="text-center bg-dark text-white">
+    <form class="form-signin" method="post">
+        <img class="mb-4" src="~/images/Book_Icon.png" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <label for="inputEmail" class="sr-only" asp-for="Input.Email">Email</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email" asp-for="Input.Email" required="" autofocus="">
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+        <label for="inputPassword" class="sr-only" asp-for="Input.Password">Пароль</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" asp-for="Input.Password" required="">
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+        <div class="checkbox mb-3">
+            <label asp-for="Input.RememberMe">
+                <input type="checkbox" value="remember-me" asp-for="Input.RememberMe">
+                @Html.DisplayNameFor(m => m.Input.RememberMe)
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+        <div class="form-group">
+            <p>
+                <a id="forgot-password" asp-page="./ForgotPassword">Забыли пароль?</a>
+            </p>
+            <p>
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Регистрация</a>
+            </p>
+        </div>
+    </form>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+</body>
+</html>
