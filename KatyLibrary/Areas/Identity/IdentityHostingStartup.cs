@@ -19,7 +19,7 @@ namespace KatyLibrary.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("KatyLibraryContextConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<KatyLibraryContext>();
             });
         }
