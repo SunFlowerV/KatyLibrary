@@ -1,0 +1,9 @@
+﻿@using System.Collections.Generic
+@inject KatyLibrary.Models.LibraryContext db
+@{
+    IEnumerable<Genre> gen = db.Genres.ToList();
+}
+@foreach (var genre in gen)
+{
+    <a class="dropdown-item" href="#">@genre.Name</a>
+}

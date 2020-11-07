@@ -12,8 +12,7 @@ namespace KatyLibrary.Models
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
         
-        public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
+
         public LibraryContext(DbContextOptions<LibraryContext> options) : base(options)
         {
             
