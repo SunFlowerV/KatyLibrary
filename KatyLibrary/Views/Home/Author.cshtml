@@ -1,0 +1,20 @@
+﻿@model IEnumerable<KatyLibrary.Models.Author>
+<h1>Авторы</h1>
+@for (int i = 3; i < Model.Count() + 3; i = i + 4)
+{
+<div class="row">
+    @for (int l = i; l <= i + 3; l++)
+    {
+        @if (Model.FirstOrDefault(u => u.AuthorId == l) != null)
+        {
+            <div class="col-md-3 card">
+                <img class=".img-thumbnail img-fluid mx-auto d-block card-img-top" src="@Model.FirstOrDefault(u => u.AuthorId == l).Foto"/>
+                <div class="card-body ">
+                    <h4>@Model.FirstOrDefault(u => u.AuthorId == l).Name</h4>
+                    <a asp-controller="Home" asp-action="AuthorInfo" asp-route-id="@l" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        }
+    }
+</div>
+}

@@ -23,13 +23,29 @@ namespace KatyLibrary.Controllers
         {
             return View();
         }
-
+        public IActionResult Author()
+        {
+            
+            return View(db.Authors.ToList());
+        }
+        public IActionResult AuthorInfo(int? id)
+        {
+            if(id != null)
+            {
+                Author author = db.Authors.FirstOrDefault(u => u.AuthorId == id);
+                if(author != null)
+                {
+                    return View(db.Authors.FirstOrDefault(u => u.AuthorId == id));
+                }
+            }
+            return NotFound();
+        }
         public IActionResult Privacy()
         {
             return View();
         }
 
-        public ActionResult GenreLink()
+        public IActionResult GenreLink()
         {
             return PartialView(db.Genres.ToList());
         }
