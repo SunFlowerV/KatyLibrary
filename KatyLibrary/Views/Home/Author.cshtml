@@ -7,8 +7,8 @@
     {
         @if (Model.FirstOrDefault(u => u.AuthorId == l) != null)
         {
-            <div class="col-md-3 card">
-                <img class=".img-thumbnail img-fluid mx-auto d-block card-img-top" src="@Model.FirstOrDefault(u => u.AuthorId == l).Foto"/>
+            <div class="col-lg-3 col-sm-6 card">
+                <img class=".img-thumbnail img-fluid mx-auto d-block card-img-top" src="@Model.FirstOrDefault(u => u.AuthorId == l).Foto" />
                 <div class="card-body ">
                     <h4>@Model.FirstOrDefault(u => u.AuthorId == l).Name</h4>
                     <a asp-controller="Home" asp-action="AuthorInfo" asp-route-id="@l" class="btn btn-primary">Подробнее</a>
@@ -16,5 +16,6 @@
             </div>
         }
     }
+    
 </div>
 }
