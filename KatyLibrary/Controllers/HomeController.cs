@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using KatyLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KatyLibrary.Controllers
 {
@@ -21,7 +23,7 @@ namespace KatyLibrary.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+            return View(db.Books.Include(u => u.Author).ToList());
         }
         public IActionResult Author()
         {
@@ -36,6 +38,18 @@ namespace KatyLibrary.Controllers
                 if(author != null)
                 {
                     return View(db.Authors.FirstOrDefault(u => u.AuthorId == id));
+                }
+            }
+            return NotFound();
+        }
+        public IActionResult BookInfo(int? id)
+        {
+            if(id != null)
+            {
+                Book book = db.Books.FirstOrDefault(u => u.BookId == id);
+                if(book != null)
+                {
+                    return View(db.Books.Include(u => u.Author).Include(u => u.GenreBooks).ThenInclude(p => p.Genre).FirstOrDefault(u => u.BookId == id));
                 }
             }
             return NotFound();

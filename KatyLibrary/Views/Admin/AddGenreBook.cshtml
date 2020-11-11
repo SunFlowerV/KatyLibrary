@@ -1,0 +1,14 @@
+﻿@model KatyLibrary.Models.GenreBook
+    <form method="post">
+        <div class="form-group">
+            <label for="genreid" asp-for="GenreId" class="sr-only">Жанр:</label>
+            <select asp-for="GenreId" asp-items="ViewBag.Genres" class="form-control" id="genreid" placeholder="Жанр" required=""></select>
+        </div>
+        <div class="form-group">
+            <label for="bookid" asp-for="BookId" class="sr-only">Автор:</label>
+            <select asp-for="BookId" asp-items="ViewBag.Books" class="form-control" id="bookid" placeholder="Автор" required=""></select>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary" type="submit">Добавить</button>
+        </div>
+    </form>

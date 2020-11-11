@@ -4,14 +4,16 @@ using KatyLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KatyLibrary.Migrations.Library
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20201111102707_bookfix")]
+    partial class bookfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +60,7 @@ namespace KatyLibrary.Migrations.Library
                         .HasColumnType("int");
 
                     b.Property<string>("BookCover")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("/images/NotCover.png");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsBestSeller")
                         .ValueGeneratedOnAdd()

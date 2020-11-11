@@ -17,8 +17,8 @@ namespace KatyLibrary.Models
         public Author Author { get; set; }
         public List<GenreBook> GenreBooks { get; set; }
         public string BookCover { get; set; }
-        public int YearOfPubliching { get; set; }
-        public int NumberOfPages { get; set; }
+        public int? YearOfPubliching { get; set; }
+        public int? NumberOfPages { get; set; }
         public string Annotation { get; set; }
         public bool IsBestSeller { get; set; }
         public string Text { get; set; }

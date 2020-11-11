@@ -1,5 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model KatyLibrary.Models.Book
+    <form method="post">
+        <div class="form-group">
+            <label for="name" asp-for="Name" class="sr-only">Полное имя:</label>
+            <input type="text" id="name" asp-for="Name" class="form-control" placeholder="Полное имя" required="" autofocus="" />
+        </div>
+        <div class="form-group">
+            <label for="authprid" asp-for="AuthorId" class="sr-only">Автор:</label>
+            <select asp-for="AuthorId" asp-items="ViewBag.Authors" class="form-control" id="authorid" placeholder="Автор" required=""></select>
+        </div>
+        <div class="form-group">
+            <label for="yearofpubliching" asp-for="YearOfPubliching" class="sr-only">Год издания:</label>
+            <input type="number" id="yearofpubliching" asp-for="YearOfPubliching" class="form-control" placeholder="Год издания" />
+        </div>
+        <div class="form-group">
+            <label for="numberofpages" asp-for="NumberOfPages" class="sr-only">Количество страниц:</label>
+            <input type="number" id="numberofpages" asp-for="NumberOfPages" class="form-control" placeholder="Количество страниц" />
+        </div>
+        <div class="form-group">
+            <label for="annotation" asp-for="Annotation" class="sr-only">Описание:</label>
+            <textarea id="annotation" asp-for="Annotation" class="form-control" placeholder="Описание" rows="7"></textarea>
+        </div>
+        <div class="form-group form-check">
+            <label asp-for="IsBestSeller" class="form-check-label">
+                <input type="checkbox" value="BestSeller" asp-for="IsBestSeller" class="form-check-input">
+                Бестселлер
+            </label>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary" type="submit">Добавить</button>
+        </div>
+
+    </form>

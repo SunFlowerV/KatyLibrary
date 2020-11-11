@@ -33,6 +33,7 @@ namespace KatyLibrary.Models
                 .HasForeignKey(sc => sc.BookId);
             modelBuilder.Entity<Book>().Property(u => u.IsBestSeller).HasDefaultValue(false);
             modelBuilder.Entity<Author>().Property(u => u.Foto).HasDefaultValue("/images/NotAvatar.png");
+            modelBuilder.Entity<Book>().Property(u => u.BookCover).HasDefaultValue("/images/NotCover.png");
         }
     }
 }

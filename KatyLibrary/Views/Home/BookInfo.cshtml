@@ -1,0 +1,23 @@
+﻿@model KatyLibrary.Models.Book
+<div class="container-fluid">
+    <h3>@Model.Name</h3>
+    <img class="float-sm-left border m-3" src="@Model.BookCover" />
+    <h4>Автор: @Model.Author.Name</h4>
+    @if(Model.YearOfPubliching != null)
+    {
+        <p>Год издания:@Model.YearOfPubliching</p>
+    }
+    @if(Model.NumberOfPages != null)
+    {
+        <p>Кол-во страниц:@Model.NumberOfPages</p>
+    }
+    @if(Model.GenreBooks != null)
+    {
+        foreach(var genre in Model.GenreBooks)
+        {
+            <p>@genre.Genre.Name</p>
+        }
+    }
+    <h4>Описание:</h4>
+    <p>@Model.Annotation</p>
+</div>

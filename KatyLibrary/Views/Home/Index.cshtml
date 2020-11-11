@@ -2,13 +2,29 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-        <a asp-area="" asp-controller="Admin" asp-action="AddAuthor">KatyLibrary</a>
+@model IEnumerable<KatyLibrary.Models.Book>
+@for (int i = 2; i < Model.Count() + 3; i = i + 4)
+{
+    <div class="row">
+        @for (int l = i; l <= i + 3; l++)
+        {
+            @if (Model.FirstOrDefault(u => u.BookId == l) != null)
+            {
+                <div class="col-lg-3 col-sm-6 card">
+                    <img class=".img-thumbnail img-fluid mx-auto d-block card-img-top" src="@Model.FirstOrDefault(u => u.BookId == l).BookCover" />
+                    <div class="card-body ">
+                        <h4>@Model.FirstOrDefault(u => u.BookId == l).Name</h4>
+                        <h5>@Model.FirstOrDefault(u => u.BookId == l).Author.Name</h5>
+                        <a asp-controller="Home" asp-action="BookInfo" asp-route-id="@l" class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div>
+            }
+        }
     </div>
-<div>
-    
-    <p></p>
+}
+<div class="text-center">
+    <a asp-area="" asp-controller="Admin" asp-action="AddAuthor">KatyLibrary</a>
+    <a asp-area="" asp-controller="Admin" asp-action="AddBook">KatyLibrary</a>
+    <a asp-area="" asp-controller="Admin" asp-action="AddGenreBook">KatyLibrary</a>
 </div>
+
