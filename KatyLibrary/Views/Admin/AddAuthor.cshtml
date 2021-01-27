@@ -1,5 +1,5 @@
 ﻿@model KatyLibrary.Models.Author
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name" asp-for="Name" class="sr-only">Полное имя:</label>
             <input type="text" id="name" asp-for="Name" class="form-control" placeholder="Полное имя" required="" autofocus="" />
@@ -7,6 +7,9 @@
         <div class="form-group">
             <label for="biography" asp-for="Biography" class="sr-only">Биография:</label>
             <textarea id="biography" asp-for="Biography" class="form-control" placeholder="Биография" rows="7"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="file" class="form-control-file border" name="uploadedFile" />
         </div>
         <div class="form-group">
             <button class="btn btn-lg btn-primary" type="submit">Добавить</button>

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using KatyLibrary.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -11,9 +14,11 @@ namespace KatyLibrary.Controllers
     public class AdminController : Controller
     {
         private LibraryContext db;
-        public AdminController(LibraryContext context)
+        private IWebHostEnvironment webHostEnvironment;
+        public AdminController(LibraryContext context, IWebHostEnvironment appEnviroment)
         {
             db = context;
+            webHostEnvironment = appEnviroment;
         }
         [HttpGet]
         public IActionResult AddAuthor()
@@ -21,8 +26,18 @@ namespace KatyLibrary.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddAuthor(Author author)
+        public async Task<IActionResult> AddAuthor(Author author, IFormFile uploadedFile)
         {
+            if(uploadedFile != null)
+            {
+                string path = "/Files/Foto/" + uploadedFile.FileName;
+                using (var fileStream = new FileStream(webHostEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+                author.Foto = path;
+            }
+            
             db.Authors.Add(author);
             await db.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
@@ -34,8 +49,17 @@ namespace KatyLibrary.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddBook(Book book)
+        public async Task<IActionResult> AddBook(Book book, IFormFile uploadedFile)
         {
+            if(uploadedFile != null)
+            {
+                string path = "/Files/Cover/" + uploadedFile.FileName;
+                using(var fileStream = new FileStream(webHostEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+                book.BookCover = path;
+            }
             db.Books.Add(book);
             await db.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
