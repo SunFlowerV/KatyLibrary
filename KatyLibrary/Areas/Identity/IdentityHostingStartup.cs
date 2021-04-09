@@ -7,21 +7,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(KatyLibrary.Areas.Identity.IdentityHostingStartup))]
-namespace KatyLibrary.Areas.Identity
-{
-    public class IdentityHostingStartup : IHostingStartup
-    {
-        public void Configure(IWebHostBuilder builder)
-        {
-            builder.ConfigureServices((context, services) => {
-                services.AddDbContext<KatyLibraryContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("KatyLibraryContextConnection")));
+//[assembly: HostingStartup(typeof(KatyLibrary.Areas.Identity.IdentityHostingStartup))]
+//namespace KatyLibrary.Areas.Identity
+//{
+//    public class IdentityHostingStartup : IHostingStartup
+//    {
+//        public void Configure(IWebHostBuilder builder)
+//        {
+//            builder.ConfigureServices((context, services) => {
+//                services.AddDbContext<KatyLibraryContext>(options =>
+//                    options.UseSqlServer(
+//                        context.Configuration.GetConnectionString("KatyLibraryContextConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<KatyLibraryContext>();
-            });
-        }
-    }
-}
+//                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//                    .AddEntityFrameworkStores<KatyLibraryContext>();
+//            });
+//        }
+//    }
+//}

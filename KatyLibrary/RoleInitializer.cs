@@ -20,6 +20,10 @@ namespace KatyLibrary
             {
                 await roleManager.CreateAsync(new IdentityRole("user"));
             }
+            if (await roleManager.FindByNameAsync("moderator") == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole("moderator"));
+            }
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
                 IdentityUser admin = new IdentityUser { Email = adminEmail, UserName = adminEmail };

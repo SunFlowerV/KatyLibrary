@@ -26,4 +26,9 @@
     <Folder Include="wwwroot\Files\Cover\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
+  </ItemGroup>
+
 </Project>

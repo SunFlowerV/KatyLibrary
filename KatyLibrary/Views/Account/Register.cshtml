@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+@model KatyLibrary.ViewModels.RegisterViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация - KatyLibrary</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/register.css" />
+</head>
+<body class="text-center bg-dark text-white">
+    <form class="form-signin" method="post" asp-controller="Account" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">
+        <img class="mb-4" src="~/images/Book_Icon.png" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <label for="inputEmail" class="sr-only" asp-for="Email">Email</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email" asp-for="Email" required="" autofocus="">
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <label for="inputPassword" class="sr-only" asp-for="Password">Пароль</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" asp-for="Password" required="">
+        <span asp-validation-for="Password" class="text-danger"></span>
+        <label for="inputConfirmPassword" class="sr-only" asp-for="ConfirmPassword">Пароль ещё раз</label>
+        <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Пароль ещё раз" asp-for="ConfirmPassword" required="">
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
+        <div class="form-group">
+            <p>
+                <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">У меня уже есть аккаунт</a>
+            </p>
+        </div>
+    </form>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+</body>
+</html>

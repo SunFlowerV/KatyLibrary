@@ -20,7 +20,6 @@ namespace KatyLibrary.Controllers
         {
             db = context;
         }
-        [Authorize]
         public IActionResult Index()
         {
             return View(db.Books.Include(u => u.Author).ToList());

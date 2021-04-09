@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KatyLibrary.Chat;
 using KatyLibrary.Data;
 using KatyLibrary.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -32,14 +33,15 @@ namespace KatyLibrary
             services.AddDbContext<LibraryContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDbContext<KatyLibraryContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("KatyLibraryContextConnection")));
-            // установка конфигурации подключения
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<KatyLibraryContext>();
+            services.AddDbContext<KatyLibraryContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("KatyLibraryContextConnection")));
+            //установка конфигурации подключения
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<KatyLibraryContext>();
             services.AddControllersWithViews();
-            services.AddRazorPages();
+            //services.AddRazorPages();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,7 +71,8 @@ namespace KatyLibrary
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
+                //endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chat");
             });
         }
     }
