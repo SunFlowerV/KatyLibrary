@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="AdminUsers" asp-action="Index">
+                            <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                            Пользователи <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="AddAuthor">
+                            <i class="fa  fa-address-book fa-2x" aria-hidden="true" ></i>
+                            Добавить автора
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="AddBook">
+                            <i class="fa  fa-book fa-2x" aria-hidden="true"></i>
+                            Добавить книгу
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="AddGenre">
+                            <i class="fa  fa-bookmark fa-2x" aria-hidden="true"></i>
+                            Добавить жанр
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="AddGenreBook">
+                            <i class="fa  fa-book fa-2x" aria-hidden="true"></i>
+                            Добавить жанры книги
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            @RenderBody()
+        </main>
+    </div>
+</div>

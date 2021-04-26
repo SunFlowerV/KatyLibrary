@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using KatyLibrary.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace KatyLibrary.Controllers
 {
@@ -16,9 +17,13 @@ namespace KatyLibrary.Controllers
     public class HomeController : Controller
     {
         public LibraryContext db;
-        public HomeController(LibraryContext context)
+        public UserManager<IdentityUser> _userManager;
+        public UserContentContext db2;
+        public HomeController(LibraryContext context, UserManager<IdentityUser> userManager, UserContentContext context2)
         {
             db = context;
+            _userManager = userManager;
+            db2 = context2;
         }
         public IActionResult Index()
         {
@@ -67,6 +72,15 @@ namespace KatyLibrary.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> Bye(int id)
+        {
+            UserBook userBook = new UserBook { UserId = _userManager.GetUserId(User), BookId = id };
+            db2.UserBooks.Add(userBook);
+            await db2.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
     }
 }

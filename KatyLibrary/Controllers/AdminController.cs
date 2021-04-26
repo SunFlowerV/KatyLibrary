@@ -93,5 +93,9 @@ namespace KatyLibrary.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
         }
+         public IActionResult AdminR()
+        {
+            return View();
+        }
     }
 }

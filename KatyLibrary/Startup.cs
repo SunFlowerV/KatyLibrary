@@ -39,6 +39,9 @@ namespace KatyLibrary
             //установка конфигурации подключения
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<KatyLibraryContext>();
+            services.AddDbContext<UserContentContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("UserContentConnection")));
             services.AddControllersWithViews();
             //services.AddRazorPages();
             services.AddSignalR();

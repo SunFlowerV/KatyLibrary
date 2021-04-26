@@ -1,23 +1,39 @@
 ﻿@model KatyLibrary.Models.Book
+@inject KatyLibrary.Models.UserContentContext db
+@inject UserManager<IdentityUser> UserManager
 <div class="container-fluid">
     <h3>@Model.Name</h3>
     <img class="float-sm-left border m-3" src="@Model.BookCover" />
     <h4>Автор: @Model.Author.Name</h4>
-    @if(Model.YearOfPubliching != null)
+    @if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "admin"))
+    {
+
+    }
+    else
+    {
+        <form method="post" asp-controller="Home" asp-action="Bye" asp-route-id="@Model.BookId">
+            <div class="form-group">
+                <button class="btn btn-lg btn-success" type="submit">Купить</button>
+
+            </div>
+        </form>
+    }
+    @if (Model.YearOfPubliching != null)
     {
         <p>Год издания:@Model.YearOfPubliching</p>
     }
-    @if(Model.NumberOfPages != null)
+    @if (Model.NumberOfPages != null)
     {
         <p>Кол-во страниц:@Model.NumberOfPages</p>
     }
-    @if(Model.GenreBooks != null)
+    @if (Model.GenreBooks != null)
     {
-        foreach(var genre in Model.GenreBooks)
+        foreach (var genre in Model.GenreBooks)
         {
             <p>@genre.Genre.Name</p>
         }
     }
     <h4>Описание:</h4>
     <p>@Model.Annotation</p>
+
 </div>

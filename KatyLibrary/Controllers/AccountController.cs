@@ -1,24 +1,29 @@
-﻿using KatyLibrary.ViewModels;
+﻿using KatyLibrary.Models;
+using KatyLibrary.ViewModels;
+using KatyLibrary.UsersSqlCommand;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace KatyLibrary.Controllers
 {
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
+        public LibraryContext db;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, LibraryContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            db = context;
         }
 
         [HttpGet]
@@ -153,9 +158,16 @@ namespace KatyLibrary.Controllers
             return View(model);
         }
         [HttpGet]
-        public IActionResult UserR()
+        public async Task<IActionResult> MyBook()
         {
-            return View();
+            var books = db.Books.Include(u => u.Author).ToList();
+            IEnumerable<int> bookId = await ReadUserBook.ReadThisUserBook(_userManager.GetUserId(User));
+            List<Book> userBooks = new List<Book>();
+            foreach (var b in bookId)
+            {
+                userBooks.Add(books.FirstOrDefault(u => u.BookId == b));
+            }
+            return View(userBooks);
         }
     }
 }
