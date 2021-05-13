@@ -1,22 +1,28 @@
 ﻿@model KatyLibrary.Models.Book
-@inject KatyLibrary.Models.UserContentContext db
 @inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = Model.Name;
+}
+
 <div class="container-fluid">
     <h3>@Model.Name</h3>
     <img class="float-sm-left border m-3" src="@Model.BookCover" />
     <h4>Автор: @Model.Author.Name</h4>
-    @if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "admin"))
+    @if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "user"))
     {
+        if (!ViewBag.IsBuy)
+        {
+            <form method="post" asp-controller="Home" asp-action="Bye" asp-route-id="@Model.BookId">
+                <div class="form-group">
+                    <button class="btn btn-lg btn-success" type="submit">Купить</button>
 
-    }
-    else
-    {
-        <form method="post" asp-controller="Home" asp-action="Bye" asp-route-id="@Model.BookId">
-            <div class="form-group">
-                <button class="btn btn-lg btn-success" type="submit">Купить</button>
-
-            </div>
-        </form>
+                </div>
+            </form>
+        }
+        else
+        {
+            <button class="btn btn-lg btn-secondary" type="submit" disabled>Куплено</button>
+        }
     }
     @if (Model.YearOfPubliching != null)
     {

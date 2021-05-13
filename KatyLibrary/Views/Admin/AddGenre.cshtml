@@ -1,8 +1,11 @@
 ﻿@model KatyLibrary.Models.Genre
+@{
+    ViewBag.Title = "Добавить жанр";
+}
 <form method="post">
-    <div class="form-group">
+    <div class="form-group" enctype="multipart/form-data">
         <label for="name" asp-for="Name" class="sr-only">Название:</label>
-        <input type="text" asp-for="Name" id="name" class="form-control" placeholder="Название" required="" autofocus=""/>
+        <input type="text" asp-for="Name" id="name" class="form-control" placeholder="Название" required="" autofocus="" />
     </div>
     <div class="form-group">
         <button class="btn btn-lg btn-primary" type="submit">Добавить</button>

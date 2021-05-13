@@ -1,8 +1,12 @@
 ﻿@model KatyLibrary.ViewModels.BookVirwModel
 @{
-    ViewBag.Title = "Добавить книгу";
+    ViewBag.Title = "Редактирование книги";
 }
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="BookEdit">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <input type="hidden" asp-for="Book.BookId" />
+    </div>
     <div class="form-group">
         <label for="name" asp-for="Book.Name" class="sr-only">Название:</label>
         <input type="text" id="name" asp-for="Book.Name" class="form-control" placeholder="Название" required="" autofocus="" />
@@ -30,14 +34,18 @@
         </label>
     </div>
     <div class="form-group">
-        <label for="genreid" asp-for="GenreId" class="sr-only">Жанры:</label>
-        <select multiple="multiple" asp-for="GenreId" asp-items="ViewBag.Genres" class="form-control"  id="genreid" placeholder="Жанры" required=""></select>
+        <label for="genreid" asp-for="GenreId" class="sr-only">Автор:</label>
+        <select multiple="multiple" asp-for="GenreId" asp-items="ViewBag.Genres" class="form-control" id="genreid" placeholder="Автор" required=""></select>
     </div>
+
     <div class="form-group">
         <input type="file" class="form-control-file border" name="uploadedFile" />
     </div>
     <div class="form-group">
-        <button class="btn btn-lg btn-primary" type="submit">Добавить</button>
+    <input type="hidden" asp-for="Book.BookCover" />
+    </div>
+    <div class="form-group">
+        <button class="btn btn-lg btn-primary" type="submit">Сохранить</button>
     </div>
 
 </form>

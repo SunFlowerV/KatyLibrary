@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject UserManager<IdentityUser> UserManager;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -15,27 +14,22 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Admin" asp-action="AddAuthor">
-                            <i class="fa  fa-address-book fa-2x" aria-hidden="true" ></i>
-                            Добавить автора
+                        <a class="nav-link" asp-controller="Admin" asp-action="Author">
+                            <i class="fa  fa-address-book fa-2x" aria-hidden="true"></i>
+                            Авторы
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Admin" asp-action="AddBook">
+                        <a class="nav-link" asp-controller="Admin" asp-action="Book">
                             <i class="fa  fa-book fa-2x" aria-hidden="true"></i>
-                            Добавить книгу
+                            Книги
                         </a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Admin" asp-action="AddGenre">
+                        <a class="nav-link" asp-controller="Admin" asp-action="Genre">
                             <i class="fa  fa-bookmark fa-2x" aria-hidden="true"></i>
-                            Добавить жанр
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Admin" asp-action="AddGenreBook">
-                            <i class="fa  fa-book fa-2x" aria-hidden="true"></i>
-                            Добавить жанры книги
+                            Жанры
                         </a>
                     </li>
                 </ul>

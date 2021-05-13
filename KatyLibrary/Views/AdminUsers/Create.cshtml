@@ -1,6 +1,9 @@
-﻿@model KatyLibrary.ViewModels.CreateUserViewModel
+﻿@{
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+@model KatyLibrary.ViewModels.CreateUserViewModel
 @{
-    ViewBag.Title = "Добавление пользователя";
+    ViewBag.Title = "Добавить пользователя";
 }
 <form asp-action="Create" asp-controller="AdminUsers">
     <div asp-validation-summary="All" class="text-danger"></div>

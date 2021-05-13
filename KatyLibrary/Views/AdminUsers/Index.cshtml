@@ -7,7 +7,7 @@
     ViewBag.Title = "Список пользователей";
 }
 
-<a asp-action="Create">Добавить пользователя</a>
+<a class="btn btn-success" asp-controller="AdminUsers" asp-action="Create">Добавить пользователя</a>
 
 <table class="table">
     <tr><th>Email</th><th></th></tr>
@@ -16,9 +16,9 @@
         <tr>
             <td>@user.Email</td>
             <td>
-                <form asp-action="Delete" asp-route-id="@user.Id" method="post">
-                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@user.Id">Изменить</a>
-                    <a class="btn btn-sm btn-primary" asp-action="ChangePassword" asp-route-id="@user.Id">Сменить пароль</a>
+                <form asp-controller="AdminUsers" asp-action="Delete" asp-route-id="@user.Id" method="post">
+                    <a class="btn btn-sm btn-primary" asp-controller="AdminUsers" asp-action="Edit" asp-route-id="@user.Id">Изменить</a>
+                    <a class="btn btn-sm btn-primary" asp-controller="AdminUsers" asp-action="ChangePassword" asp-route-id="@user.Id">Сменить пароль</a>
                     <button type="submit" class="btn btn-sm btn-danger">
                         Удалить
                     </button>

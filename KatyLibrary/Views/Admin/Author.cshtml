@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Author>
+@{
+    ViewBag.Title = "Список авторов";
+}
+
+<a class="btn btn-success" asp-controller="Admin" asp-action="AddAuthor">Добавить автора</a>
+
+<table class="table">
+    <tr><th>Имя</th><th></th></tr>
+    @foreach (var author in Model)
+    {
+        <tr>
+            <td>@author.Name</td>
+            <td>
+                <form asp-controller="Admin" asp-action="AuthorDelete" asp-route-id="@author.AuthorId" method="post">
+                    <a class="btn btn-sm btn-primary" asp-controller="Admin" asp-action="AuthorEdit" asp-route-id="@author.AuthorId">Изменить</a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Удалить
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

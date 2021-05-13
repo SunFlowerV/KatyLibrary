@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Book>
+@{
+    ViewBag.Title = "Список книг";
+}
+
+<a class="btn btn-success" asp-controller="Admin" asp-action="AddBook">Добавить книгу</a>
+
+<table class="table">
+    <tr><th>Название</th><th>Автор</th><th></th></tr>
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.Name</td>
+            <td>@book.Author.Name</td>
+            <td>
+                <form asp-controller="Admin" asp-action="BookDelete" asp-route-id="@book.BookId" method="post">
+                    <a class="btn btn-sm btn-primary" asp-controller="Admin" asp-action="BookEdit" asp-route-id="@book.BookId">Изменить</a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Удалить
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

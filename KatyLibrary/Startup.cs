@@ -43,7 +43,6 @@ namespace KatyLibrary
                 options.UseSqlServer(
                     Configuration.GetConnectionString("UserContentConnection")));
             services.AddControllersWithViews();
-            //services.AddRazorPages();
             services.AddSignalR();
         }
 
@@ -53,7 +52,6 @@ namespace KatyLibrary
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseDatabaseErrorPage();
             }
             else
             {
@@ -74,7 +72,6 @@ namespace KatyLibrary
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                //endpoints.MapRazorPages();
                 endpoints.MapHub<ChatHub>("/chat");
             });
         }

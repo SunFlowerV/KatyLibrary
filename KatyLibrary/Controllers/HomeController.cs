@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using KatyLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using KatyLibrary.UsersSqlCommand;
 
 namespace KatyLibrary.Controllers
 {
@@ -46,10 +47,13 @@ namespace KatyLibrary.Controllers
             }
             return NotFound();
         }
-        public IActionResult BookInfo(int? id)
+        public async Task<IActionResult> BookInfo(int? id)
         {
+            List<int> buyBookID = (List<int>) await ReadUserBook.ReadThisUserBook(_userManager.GetUserId(User));
+
             if(id != null)
             {
+                ViewBag.IsBuy = buyBookID.Any(u => u == id);
                 Book book = db.Books.FirstOrDefault(u => u.BookId == id);
                 if(book != null)
                 {
@@ -80,7 +84,7 @@ namespace KatyLibrary.Controllers
             UserBook userBook = new UserBook { UserId = _userManager.GetUserId(User), BookId = id };
             db2.UserBooks.Add(userBook);
             await db2.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

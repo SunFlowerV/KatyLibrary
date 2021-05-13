@@ -1,4 +1,7 @@
 ﻿@model KatyLibrary.Models.Author
+@{
+    ViewData["Title"] = Model.Name;
+}
 <div class="container-fluid">
     <h3>@Model.Name</h3>
     <img class="float-sm-left border m-3" src="@Model.Foto" />

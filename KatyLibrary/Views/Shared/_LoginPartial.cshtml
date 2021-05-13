@@ -10,13 +10,18 @@
         if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "admin"))
         {
             <li class="nav-item">
-                <a id="manage" class="nav-link" asp-controller="Admin" asp-action="AdminR" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                <a id="manage" class="nav-link" asp-controller="AdminUsers" asp-action="Index" title="Manage">
+                    <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i>
+                @UserManager.GetUserName(User)!</a>
             </li>
         }
         if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "user"))
         {
             <li class="nav-item">
-                <a id="manage" class="nav-link" asp-controller="Account" asp-action="MyBook" title="Аккаунт">Hello @UserManager.GetUserName(User)!</a>
+
+                <a id="manage" class="nav-link" asp-controller="Account" asp-action="MyBook" title="Аккаунт">
+                    <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i>
+                @UserManager.GetUserName(User)!</a>
             </li>
         }
         <li class="nav-item">

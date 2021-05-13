@@ -1,0 +1,31 @@
+﻿@using System.Collections.Generic
+@inject KatyLibrary.Models.LibraryContext db
+@{
+    IEnumerable<Genre> gen = db.Genres.ToList();
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    @foreach (var genre in gen)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-controller="GenreFilter" asp-action="Index" asp-route-genre="@genre.GenreId">
+                                @genre.Name
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            @RenderBody()
+        </main>
+    </div>
+</div>

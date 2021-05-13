@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace KatyLibrary.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AdminUsersController : Controller
     {
         UserManager<IdentityUser> _userManager;
@@ -17,14 +18,14 @@ namespace KatyLibrary.Controllers
         {
             _userManager = userManager;
         }
-
+        
         public IActionResult Index() => View(_userManager.Users.ToList());
 
-        [Authorize(Roles ="admin")]
+        
         public IActionResult Create() => View();
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        
         public async Task<IActionResult> Create(CreateUserViewModel model)
         {
             if (ModelState.IsValid)
@@ -36,7 +37,7 @@ namespace KatyLibrary.Controllers
                     var roleresult = await _userManager.AddToRoleAsync(user, "user");
                     if (roleresult.Succeeded)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", "AdminUsers");
                     }
                     else
                     {
@@ -57,7 +58,7 @@ namespace KatyLibrary.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
+        
         public async Task<IActionResult> Edit(string id)
         {
             IdentityUser user = await _userManager.FindByIdAsync(id);
@@ -69,7 +70,7 @@ namespace KatyLibrary.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
+        
         [HttpPost]
         public async Task<IActionResult> Edit(EditUserViewModel model)
         {
@@ -84,7 +85,7 @@ namespace KatyLibrary.Controllers
                     var result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", "AdminUsers");
                     }
                     else
                     {
@@ -98,7 +99,7 @@ namespace KatyLibrary.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
+        
         [HttpPost]
         public async Task<ActionResult> Delete(string id)
         {
@@ -107,10 +108,10 @@ namespace KatyLibrary.Controllers
             {
                 IdentityResult result = await _userManager.DeleteAsync(user);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "AdminUsers");
         }
 
-        [Authorize(Roles = "admin")]
+        
         public async Task<IActionResult> ChangePassword(string id)
         {
             IdentityUser user = await _userManager.FindByIdAsync(id);
@@ -123,7 +124,6 @@ namespace KatyLibrary.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
         public async Task<IActionResult> ChangePassword(AdminChangePasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -142,7 +142,7 @@ namespace KatyLibrary.Controllers
                     {
                         user.PasswordHash = _passwordHasher.HashPassword(user, model.NewPassword);
                         await _userManager.UpdateAsync(user);
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", "AdminUsers");
                     }
                     else
                     {

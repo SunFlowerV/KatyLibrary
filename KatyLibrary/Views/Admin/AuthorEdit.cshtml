@@ -1,8 +1,12 @@
 ﻿@model KatyLibrary.Models.Author
 @{
-    ViewBag.Title = "Добавить автора";
+    ViewBag.Title = "Редактирование автора";
 }
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="AuthorEdit">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <input type="hidden" asp-for="AuthorId" />
+    </div>
     <div class="form-group">
         <label for="name" asp-for="Name" class="sr-only">Полное имя:</label>
         <input type="text" id="name" asp-for="Name" class="form-control" placeholder="Полное имя" required="" autofocus="" />
@@ -15,7 +19,10 @@
         <input type="file" class="form-control-file border" name="uploadedFile" />
     </div>
     <div class="form-group">
-        <button class="btn btn-lg btn-primary" type="submit">Добавить</button>
+        <input type="hidden" asp-for="Foto" />
+    </div>
+    <div class="form-group">
+        <button class="btn btn-lg btn-primary" type="submit">Сохранить</button>
     </div>
 
 </form>
